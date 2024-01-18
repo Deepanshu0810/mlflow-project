@@ -1,1 +1,16 @@
-key: val
+COLUMNS:
+  fixed_acidity: float32
+  volatile_acidity: float32
+  citric_acid: float32
+  residual_sugar: float32
+  chlorides: float32
+  free_sulfur_dioxide: float32
+  total_sulfur_dioxide: float32
+  density: float32
+  pH: float32
+  sulphates: float32
+  alcohol: float32
+  quality: int32
+
+TARGET:
+  name: quality
