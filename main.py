@@ -1,6 +1,7 @@
 from mlflowProject import logger
 from mlflowProject.pipeline.stage_01_data_ingestion import DataIngestionPipeline
 from mlflowProject.pipeline.stage_02_data_validation import DataValidationPipeline
+from mlflowProject.pipeline.stage_03_data_transformation import DataTransformationPipeline
 
 STAGE_NAME = "Data Ingestion Stage"
 try:
@@ -15,10 +16,20 @@ except Exception as e:
 
 STAGE_NAME = "Data Validation Stage"
 try:
-    logger.info(f">>>>> Running Pipeline {STAGE_NAME} <<<<<")
+    logger.info(f">>>>> Starting Stage {STAGE_NAME} <<<<<")
     pipeline = DataValidationPipeline()
     pipeline.main()
-    logger.info(f">>>>> Completed Pipeline {STAGE_NAME} <<<<<")
+    logger.info(f">>>>> Completed Stage {STAGE_NAME} <<<<<")
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "Data Transformation Stage"
+try:
+    logger.info(f">>>>> Starting Stage {STAGE_NAME} <<<<<")
+    pipeline = DataTransformationPipeline()
+    pipeline.main()
+    logger.info(f">>>>> Completed Stage {STAGE_NAME} <<<<<")
 except Exception as e:
     logger.exception(e)
     raise e
