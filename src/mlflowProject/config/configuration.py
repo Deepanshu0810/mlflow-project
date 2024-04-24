@@ -1,6 +1,6 @@
 from mlflowProject.constants import *
 from mlflowProject.utils.common import read_yaml, create_directories
-from mlflowProject.entity.config_entity import DataIngestionConifg, DataValidationConfig, DataTransformationConfig
+from mlflowProject.entity.config_entity import DataIngestionConifg, DataValidationConfig, DataTransformationConfig, ModelTrainerConfig
 
 class ConfigurationManager:
     def __init__(
@@ -55,3 +55,22 @@ class ConfigurationManager:
         )
 
         return data_transformation_config
+    
+    def get_model_config(self) -> ModelTrainerConfig:
+        config = self.config.model_trainer
+        params = self.params
+        schema = self.schema
+
+        create_directories([config.root_dir])
+
+        model_trainer_config = ModelTrainerConfig(
+            root_dir = config.root_dir,
+            training_data_file = config.training_data_file,
+            testing_data_file = config.testing_data_file,
+            model = config.model,
+            alpha = params.ElasticNet.alpha,
+            l1_ratio = params.ElasticNet.l1_ratio,
+            target_column = schema.TARGET.name
+        )
+
+        return model_trainer_config
